@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    *{
+        margin: 0 auto;
+        padding: 0;
+        font-size: 22px;
+        font-family: "微软雅黑";
+    }
+    .index{
+        width:1200px;
+        height:50px;
+        background-color:#FFF;
+    }
+    .indexN{
+        width:298px;
+        height:50px;
+        line-height: 50px;
+        text-align: center;
+        border-radius: 5px 5px 0 0;
+        border: rgba(200, 200, 200, 0.2) solid 1px;
+        display: block-inline;
+        color: #666;
+        float: left;
+    }
+    .pic,.bgimg{
+        width:1200px;
+        height:460px;
+        overflow: hidden;
+    }
+    .pic1{
+        background-image: url(./img/1.jpg);
+    }
+    .pic2{
+        background-image: url(./img/3.jpg);
+    }
+    .pic3{
+        background-image: url(./img/4.jpg);
+    }
+    .pic4{
+        background-image: url(./img/5.jpg);
+    }
+    .pic .active{
+        display: block;
+    }
+    .index .active{
+        background-color: #FFCC00;
+    }
+  </style>
+</head>
+<body>
+    <div class="main" id="main">
+        <div class="index">
+            <div class="indexN index1 active" id="index1">首页</div>
+            <div class="indexN index2" id="index2">点击看看</div>
+            <div class="indexN index3" id="index3">会自动的</div>
+            <div class="indexN index4" id="index4">我的网站</div>
+        </div>
+        <div class="pic">
+            <div class="bgimg pic1 active"></div>
+            <div class="bgimg pic2"></div>
+            <div class="bgimg pic3"></div>
+            <div class="bgimg pic4"></div>
+        </div>
+    </div>
+    <script>
+        var n=0;
+        var index=document.getElementsByClassName("index")[0];
+        var mainDiv=document.getElementById("main");
+        var indexN=document.getElementsByClassName("indexN");
+        var bgimg=document.getElementsByClassName("bgimg");
+        var num=bgimg.length;
+        function defaultSet(){
+            for(var i=0;i<num;i++){
+                    bgimg[i].style.display="none";
+                    indexN[i].style.backgroundColor="#FFFFFF";
+                }
+        }
+        function displaySet(){
+            indexN[n].style.backgroundColor="#FFCC00";
+            bgimg[n].style.display="block";
+        }
+        function autoPlay(){
+            defaultSet();
+            bgimg[n].style.display="block";
+            indexN[n].style.backgroundColor="#FFCC00";
+        }
+        function start(){
+            n++;
+            n=n%num;
+            autoPlay();
+        }
+        var play=setInterval(start,1000);
+        mainDiv.onmouseout=function(){
+            play=setInterval(start,1000);
+        }
+        mainDiv.onmouseover=function(){
+            clearInterval(play);
+        }
+        index.addEventListener("click",function(event){
+            if(event.target.id=="index1"){
+                n=0;
+                defaultSet();
+                displaySet();
+            }else if(event.target.id=="index2"){
+                n=1;
+                defaultSet();
+                displaySet();
+            }else if(event.target.id=="index3"){
+                n=2;
+                defaultSet();
+                displaySet();
+            }
+            else if(event.target.id=="index4"){
+                n=3;
+                defaultSet();
+                displaySet();
+            }
+        },false)
+        
+    </script>
+</body>
+</html>
